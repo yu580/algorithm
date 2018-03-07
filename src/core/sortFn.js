@@ -1,0 +1,99 @@
+
+//排序方法集合
+function SortFn() {
+    /**
+     * 选择排序方法
+     * @param {* 需要排序的数组} arr 
+     * @param {* 数组的长度} n 
+     */
+    this.selectionSort = (arr, n) => {
+        for (let i = 0; i < n; i++) {
+            let minIndex = i
+            for (let j = i + 1; j < n; j++) {
+                //arr[j] < arr[minIndex] 可以抽象成一个函数 例如less（）return一个boolean 
+                //更高的抽象可以将这个less函数以函数指针的传递进来  这个样函数就更灵活
+                if (arr[j] < arr[minIndex]) {
+                    // [arr[minIndex], arr[j]] = [arr[j], arr[minIndex]]
+                    // 找到当前数组的最小值放到第一位
+                    var temp = arr[minIndex]
+                    arr[minIndex] = arr[j]
+                    arr[j] = temp
+                }
+            }
+        }
+        // log(arr)
+    }
+
+    /**
+     * 插入排序方法
+     * @param {* 需要排序的数组} arr 
+     * @param {* 数组的长度} n 
+     */
+    this.insertionSort = (arr, n) => {
+        for (let i = 1; i < n; i++) {
+            //寻找arr[i]合适的插入位置,所以需要遍历之前比较过的数据
+            for (let j = i; j > 0; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    //变量结构赋值 测试10000数据的时候预计多消耗.3s的性能
+                    // [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]]
+
+                    var temp = arr[j - 1]
+                    arr[j - 1] = arr[j]
+                    arr[j] = temp
+                } else {
+                    break
+                }
+            }
+        }
+    }
+    //插入排序优化写法,将比较后互换位置 变成寻找位置并赋值
+    this.insertionSort1 = (arr, n) => {
+        for (let i = 1; i < n; i++) {
+            //寻找arr[i]合适的插入位置,所以需要遍历之前比较过的数据
+            let e = arr[i];
+            let j
+            for (j = i; j > 0 && arr[j - 1] > e; j--) {
+                arr[j] = arr[j - 1]
+            }
+            arr[j] = e
+        }
+    }
+    /**
+     * 冒泡排序
+     * @param {* 需要排序的数组} arr 
+     * @param {* 数组长度} n 
+     */
+    this.bubbleSort = (arr, n) => {
+        for (i = 0; i < n - 1; i++) {
+            for (j = 0; j < n - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    var temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+            log(arr)
+        }
+    }
+    /**
+     * 希尔排序
+     * @param {* 需要排序的数组} arr 
+     * @param {* 数组长度} n 
+     */
+    this.shellSort = (arr, n) => {
+        gap = Math.floor(n / 2);
+        // while (gap !== 0) {
+            for (var i = gap; i < n; i++) {
+                var temp = arr[i];
+                var j;
+                for (j = i - gap; j >= 0 && temp < arr[j]; j -= gap) {
+                    log(j)
+                    arr[j + gap] = arr[j];
+                }
+                arr[j + gap] = temp;
+            }
+            gap = Math.floor(gap / 2);
+        // }
+    }
+
+}
