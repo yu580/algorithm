@@ -76,24 +76,65 @@ function SortFn() {
         }
     }
     /**
-     * 希尔排序
+     * 希尔排序  img里面有图解
      * @param {* 需要排序的数组} arr 
      * @param {* 数组长度} n 
      */
     this.shellSort = (arr, n) => {
         gap = Math.floor(n / 2);
-        // while (gap !== 0) {
+        while (gap !== 0) {
             for (var i = gap; i < n; i++) {
                 var temp = arr[i];
                 var j;
                 for (j = i - gap; j >= 0 && temp < arr[j]; j -= gap) {
-                    log(j)
                     arr[j + gap] = arr[j];
                 }
                 arr[j + gap] = temp;
             }
             gap = Math.floor(gap / 2);
-        // }
+        }
+    }
+    /**
+     * 归并排序  
+     * @param {* 需要排序的数组} arr 
+     * @param {* 数组长度} n 
+     */
+    function __merge(arr, l, mid, r) {
+        let result = arr;
+       
+        let i = l, j = mid + 1;
+        // log(result)
+        for (let k = l; k <= r; k++) {
+            if (i > mid) {
+                arr[k] = result[j - l]
+                j++
+            } else if (j > r) {
+                arr[k] = result[i - l]
+                i++
+            } else if (arr[i - l] < arr[j - l]) {
+                arr[k] = result[i - l]
+                i++
+            } else {
+                arr[k] = result[j - l]
+                j++
+            }
+        }
+        
+    }
+    function __mergeSort(arr, l, r) {
+        if (l >= r) {
+            return
+        }
+        //l+r可能超出计算机的最大数值
+        let mid = Math.floor((l + r) / 2)
+        __mergeSort(arr, l, mid)
+        __mergeSort(arr, mid + 1, r)
+        __merge(arr, l, mid, r)
+    }
+    this.mergeSort = (arr, n) => {
+        // log(arr)
+        __mergeSort(arr, 0, n -1)
     }
 
+    
 }
