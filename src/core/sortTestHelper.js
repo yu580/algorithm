@@ -43,6 +43,7 @@ function SortTestHelper() {
             log(name + ":排序耗时" + String((endTime - startTime) / 1000) + 's')
         } else {
             log('排序失败')
+            log(arr)
         }
     }
     /**

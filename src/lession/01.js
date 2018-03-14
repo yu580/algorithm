@@ -5,11 +5,13 @@ let customObj = new CustomObj()
 var strArr = ['a', 'b', 'c', 'd', 'f', 'a', 'b', 'c', 'd', 'f']
 var floatArr = [6.6, 7.7, 4.4, 5.5, 2.4, 3.4, 1.2, 3.4, 1.2, 45.2]
 
-let n = 1000000
+let n = 5000
 let arr = sortTestHelper.outPutArray(n, 0, n)
 let arr1 = [...arr] //或者  arr1 = [].concat(arr)
 let arr2 = [...arr] //或者  arr1 = [].concat(arr)
-let arr3 = sortTestHelper.outNearlyOrderedArray(n,100)
+let arr3 = sortTestHelper.outNearlyOrderedArray(n, 10)
+let arr4 = [...arr3]
+let arr5 = [...arr3]
 let objArr = outCustomArr(sortTestHelper.outPutArray(n, 0, n), n)
 
 // sortFn.selectionSort(arr, n)
@@ -19,9 +21,12 @@ let objArr = outCustomArr(sortTestHelper.outPutArray(n, 0, n), n)
 
 // sortTestHelper.testSort('选择排序', sortFn.selectionSort, arr, n)
 // sortTestHelper.testSort('插入排序', sortFn.insertionSort, arr1, n)
-sortTestHelper.testSort('插入排序1', sortFn.insertionSort1, arr, n)
-sortTestHelper.testSort('希尔排序', sortFn.shellSort, arr1, n)
-sortTestHelper.testSort('归并排序', sortFn.mergeSort, arr2, n)
+// sortTestHelper.testSort('插入排序1', sortFn.insertionSort1, arr3, n)
+// sortTestHelper.testSort('插入排序2', sortFn.insertionSort2, arr, n)
+// sortTestHelper.testSort('希尔排序', sortFn.shellSort, arr4, n)
+sortTestHelper.testSort('归并排序', sortFn.mergeSort, arr, n)
+sortTestHelper.testSort('归并排序bu', sortFn.mergeSortBu, arr1, n)
+sortTestHelper.testSort('快速排序', sortFn.quickSort, arr2, n)
 
 arr = null
 arr2 = null
