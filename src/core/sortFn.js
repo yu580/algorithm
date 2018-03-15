@@ -1,4 +1,17 @@
 
+/**
+ * 交换数组中索引a和索引b的值得位置
+ * @param {* 需要改变的数组} arr 
+ * @param {* 第一个值得索引} a 
+ * @param {* 第二个值得索引} b 
+ */
+function swap(arr, a, b) {
+    var temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+}
+
+
 //排序方法集合
 function SortFn() {
     /**
@@ -15,9 +28,10 @@ function SortFn() {
                 if (arr[j] < arr[minIndex]) {
                     // [arr[minIndex], arr[j]] = [arr[j], arr[minIndex]]
                     // 找到当前数组的最小值放到第一位
-                    var temp = arr[minIndex]
-                    arr[minIndex] = arr[j]
-                    arr[j] = temp
+                    // var temp = arr[minIndex]
+                    // arr[minIndex] = arr[j]
+                    // arr[j] = temp
+                    swap(arr, minIndex, j)
                 }
             }
         }
@@ -204,11 +218,18 @@ function SortFn() {
      * @param {* 数组长度} n 
      */
     this.quickSort = (arr, n) => {
+        var _this = this
         __quickSort(arr, 0, n - 1)
         function __quickSort(arr, l, r) {
+
             if (l >= r) {
                 return
             }
+            //基本上所有的高级排序在底层都可以采用插入排序进行优化
+            // if (r - l <= 10) {
+            //     _this.insertionSort2(arr, l, r)
+            //     return
+            // }
             let p = __partition(arr, l, r)
             __quickSort(arr, l, p - 1)
             __quickSort(arr, p + 1, r)
@@ -216,23 +237,112 @@ function SortFn() {
         //对arr进行partition操作返回一个索引下标 p
         //满足 arr[l,p1]里面所有的值都小于 arr[p] , arr[p+1,r]里面所有的值都大于 arr[p]
         function __partition(arr, l, r) {
+            let n = parseInt(Math.random() * (r - l + 1) + l, 10)
+            swap(arr, l, n)
             let v = arr[l]
             let p = l
             // arr[l+1...p] < v < arr[p+1...r)  r这边是开区间 因为r本身是被考察的对象
-            for (let i = l+1; i <= r; i++) {
+            for (let i = l + 1; i <= r; i++) {
                 if (arr[i] < v) {
-                    var temp = arr[p + 1]
-                    arr[p + 1] = arr[i]
-                    arr[i] = temp
+                    swap(arr, p + 1, i)
                     p++
                 }
             }
-            var temp = v
-            v = arr[p]
-            arr[p] = temp
-
+            swap(arr, l, p)
             return p
         }
     }
 
+    /**
+     * 快速排序 解决多个重复值得情况
+     * @param {* 需要排序的数组} arr 
+     * @param {* 数组长度} n 
+     */
+    this.quickSort2 = (arr, n) => {
+        var _this = this
+        __quickSort(arr, 0, n - 1)
+        function __quickSort(arr, l, r) {
+
+            if (l >= r) {
+                return
+            }
+            //基本上所有的高级排序在底层都可以采用插入排序进行优化
+            // if (r - l <= 10) {
+            //     _this.insertionSort2(arr, l, r)
+            //     return
+            // }
+            let p = __partition(arr, l, r)
+            __quickSort(arr, l, p - 1)
+            __quickSort(arr, p + 1, r)
+        }
+        //对arr进行partition操作返回一个索引下标 p
+        //满足 arr[l,p1]里面所有的值都小于 arr[p] , arr[p+1,r]里面所有的值都大于 arr[p]
+        function __partition(arr, l, r) {
+            let n = Math.floor(Math.random() * (r - l + 1) + l, 10)
+            swap(arr, l, n)
+            let v = arr[l]
+            let i = l + 1, p = r
+            while (true) {
+                while (i <= r && arr[i] < v) {
+                    i++
+                }
+                while (p >= l + 1 && arr[p] > v) {
+                    p--
+                }
+                if (i > p) {
+                    break
+                }
+                swap(arr, i, p)
+                i++
+                p--
+            }
+            swap(arr, l, p)
+            return p
+        }
+    }
+    /**
+    * 3路快速排序 解决多个重复值得情况
+    * @param {* 需要排序的数组} arr 
+    * @param {* 数组长度} n 
+    */
+    this.quickSort3Ways = (arr, n) => {
+        var _this = this
+        __quickSort(arr, 0, n - 1)
+        function __quickSort(arr, l, r) {
+
+            // if (l >= r) {
+            //     return
+            // }
+            //基本上所有的高级排序在底层都可以采用插入排序进行优化
+            if (r - l <= 15) {
+                _this.insertionSort2(arr, l, r)
+                return
+            }
+            //partition操作
+            let n = Math.floor(Math.random() * (r - l + 1) + l, 10)
+            swap(arr, l, n)
+            let v = arr[l]
+            let lt = l; // arr[l+1...lt] < v
+            let gt = r + 1; // arr[gt...r] > v
+            let i = l + 1; // arr[lt...i] == v
+
+            while (i < gt) {
+                if (arr[i] < v) {
+                    swap(arr, i, lt + 1)
+                    lt++
+                    i++
+                } else if (arr[i] > v) {
+                    swap(arr, i, gt - 1)
+                    gt--
+                } else {
+                    i++
+                }
+            }
+            swap(arr,l,lt)
+
+            __quickSort(arr,l,lt-1)
+            __quickSort(arr,gt,r)
+        }
+
+    }
 }

@@ -22,6 +22,7 @@ function SortTestHelper() {
     this.isSorted = (arr, n) => {
         for (var i = 0; i < n; i++) {
             if (arr[i] > arr[i + 1]) {
+                log(i)
                 return false
             }
         }
@@ -41,10 +42,25 @@ function SortTestHelper() {
 
         if (this.isSorted(arr, n)) {
             log(name + ":排序耗时" + String((endTime - startTime) / 1000) + 's')
+            // log(arr)
         } else {
             log('排序失败')
             log(arr)
         }
+    }
+    /**
+     * 测试查找时间
+     * @param {*排序算法的名称} name 
+     * @param {*排序函数} fn 
+     * @param {*需要排序的数组} arr 
+     * @param {*数组长度} n 
+     * @param {*查询的数组下标} m
+     */
+    this.testQu = (name, fn, arr, n, m) => {
+        let startTime = new Date().getTime();
+        fn(arr, n, m)
+        let endTime = new Date().getTime();
+        log(name + ":排序耗时" + String((endTime - startTime) / 1000) + 's')
     }
     /**
      * 生成一个几乎排列好的数组
