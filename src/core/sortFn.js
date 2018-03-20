@@ -26,16 +26,13 @@ function SortFn() {
                 //arr[j] < arr[minIndex] 可以抽象成一个函数 例如less（）return一个boolean 
                 //更高的抽象可以将这个less函数以函数指针的传递进来  这个样函数就更灵活
                 if (arr[j] < arr[minIndex]) {
-                    // [arr[minIndex], arr[j]] = [arr[j], arr[minIndex]]
-                    // 找到当前数组的最小值放到第一位
-                    // var temp = arr[minIndex]
-                    // arr[minIndex] = arr[j]
-                    // arr[j] = temp
-                    swap(arr, minIndex, j)
+                   //储存当前最小值的下标
+                    minIndex = j
                 }
             }
+            // [arr[minIndex], arr[j]] = [arr[j], arr[minIndex]]
+            swap(arr, i, minIndex)
         }
-        // log(arr)
     }
 
     /**
@@ -338,10 +335,10 @@ function SortFn() {
                     i++
                 }
             }
-            swap(arr,l,lt)
+            swap(arr, l, lt)
 
-            __quickSort(arr,l,lt-1)
-            __quickSort(arr,gt,r)
+            __quickSort(arr, l, lt - 1)
+            __quickSort(arr, gt, r)
         }
 
     }

@@ -6,7 +6,7 @@ let qu = new Qu()
 var strArr = ['a', 'b', 'c', 'd', 'f', 'a', 'b', 'c', 'd', 'f']
 var floatArr = [6.6, 7.7, 4.4, 5.5, 2.4, 3.4, 1.2, 3.4, 1.2, 45.2]
 
-let n = 500000
+let n = 10000
 //随机0--n
 let arr = sortTestHelper.outPutArray(n, 0, n)
 let arr1 = [...arr] //或者  arr1 = [].concat(arr)
@@ -29,7 +29,7 @@ let objArr = outCustomArr(sortTestHelper.outPutArray(n, 0, n), n)
 // sortFn.selectionSort(objArr, n)
 
 // 性能测试
-// sortTestHelper.testSort('选择排序', sortFn.selectionSort, arr, n)
+sortTestHelper.testSort('选择排序', sortFn.selectionSort, arr, n)
 // sortTestHelper.testSort('插入排序', sortFn.insertionSort, arr1, n)
 // sortTestHelper.testSort('插入排序1', sortFn.insertionSort1, arr3, n)
 // sortTestHelper.testSort('插入排序2', sortFn.insertionSort2, arr, n)
@@ -38,12 +38,12 @@ let objArr = outCustomArr(sortTestHelper.outPutArray(n, 0, n), n)
 // sortTestHelper.testSort('归并排序bu', sortFn.mergeSortBu, arr3, n)
 // sortTestHelper.testSort('快速排序', sortFn.quickSort, arr7, n)
 // sortTestHelper.testSort('快速排序2', sortFn.quickSort2, arr6, n)
-sortTestHelper.testSort('快速排序3', sortFn.quickSort3Ways, arr2, n)
+// sortTestHelper.testSort('快速排序3', sortFn.quickSort3Ways, arr2, n)
 
 
 //问题测试
 // qu.selectionOne(arr,500)
-sortTestHelper.testQu('查找数组任意下标的值', qu.selectionOne, arr, n, 500)
+// sortTestHelper.testQu('查找数组任意下标的值', qu.selectionOne, arr, n, 500)
 
 
 
